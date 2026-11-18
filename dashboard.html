@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Local transaction upload and audit dashboard for Seri Aman Professional Services."
+    />
+    <title>Audit Dashboard · Seri Aman</title>
+    <link rel="stylesheet" href="/static/style.css" />
+    <script src="/static/dashboard.js" defer></script>
+  </head>
+  <body class="dashboard-page">
+    <div class="dashboard-shell">
+      <header class="dashboard-header">
+        <a class="dashboard-brand" href="/dashboard">
+          <span class="dashboard-brand-mark" aria-hidden="true">S</span>
+          <span>Seri Aman <span class="muted">· Audit</span></span>
+        </a>
+        <nav aria-label="Main navigation">
+          <a href="#dashboard" aria-current="page">Dashboard</a>
+          <a href="#upload">Upload Transactions</a>
+          <a href="#findings">Audit Findings</a>
+          <a href="/">AI Assistant</a>
+        </nav>
+      </header>
+
+      <main class="dashboard-main">
+        <section id="dashboard" aria-labelledby="dashboard-title">
+          <div class="dashboard-title-row">
+            <div>
+              <p class="eyebrow">Audit overview</p>
+              <h1 id="dashboard-title">Dashboard</h1>
+              <p class="dashboard-subtitle">
+                Transaction summaries update from the most recent valid upload.
+              </p>
+            </div>
+            <span class="local-badge">Local prototype · Synthetic data only</span>
+          </div>
+
+          <div class="metric-grid" aria-live="polite">
+            <article class="metric-card">
+              <span class="metric-label">Total transactions</span>
+              <strong class="metric-value" id="total-transactions">—</strong>
+              <span class="metric-note">From the current upload</span>
+            </article>
+            <article class="metric-card">
+              <span class="metric-label">Total transaction value</span>
+              <strong class="metric-value" id="total-value">—</strong>
+              <span class="metric-note">MYR · current upload</span>
+            </article>
+            <article class="metric-card">
+              <span class="metric-label">Vendors represented</span>
+              <strong class="metric-value" id="vendor-count">—</strong>
+              <span class="metric-note">Distinct vendor names</span>
+            </article>
+            <article class="metric-card phase-card">
+              <span class="metric-label">Flagged transactions</span>
+              <strong class="metric-value">Phase 3B</strong>
+              <span class="metric-note">Rule analysis not active yet</span>
+            </article>
+            <article class="metric-card phase-card">
+              <span class="metric-label">High-risk findings</span>
+              <strong class="metric-value">Phase 3B</strong>
+              <span class="metric-note">Rule analysis not active yet</span>
+            </article>
+            <article class="metric-card phase-card">
+              <span class="metric-label">Medium-risk findings</span>
+              <strong class="metric-value">Phase 3B</strong>
+              <span class="metric-note">Rule analysis not active yet</span>
+            </article>
+            <article class="metric-card phase-card">
+              <span class="metric-label">Pending auditor review</span>
+              <strong class="metric-value">Phase 3B</strong>
+              <span class="metric-note">Review workflow not active yet</span>
+            </article>
+          </div>
+        </section>
+
+        <section id="upload" class="dashboard-panel" aria-labelledby="upload-title">
+          <div class="panel-heading">
+            <div>
+              <h2 id="upload-title">Upload financial transactions</h2>
+              <p>
+                CSV or Excel (.xlsx), maximum 5 MB. Required columns:
+                transaction_id, transaction_date, invoice_number, vendor_name,
+                amount, transaction_type, document_reference.
+                Blank document references are retained for review in a later phase.
+              </p>
+            </div>
+          </div>
+          <form id="upload-form" class="upload-form">
+            <label class="upload-dropzone" for="transaction-file">
+              <span class="upload-icon" aria-hidden="true">↑</span>
+              <strong>Choose a transaction file</strong>
+              <span id="selected-file">CSV or XLSX · up to 5 MB</span>
+              <input
+                id="transaction-file"
+                name="file"
+                type="file"
+                accept=".csv,.xlsx"
+                required
+              />
+            </label>
+            <div class="upload-actions">
+              <button id="upload-button" type="submit">Validate and upload</button>
+              <a class="sample-link" href="/sample_transactions.csv" download>
+                Download synthetic sample CSV
+              </a>
+            </div>
+            <p id="upload-message" class="upload-message" role="status" aria-live="polite"></p>
+          </form>
+        </section>
+
+        <section class="dashboard-panel" aria-labelledby="recent-title">
+          <div class="panel-heading">
+            <div>
+              <h2 id="recent-title">Recent uploaded transactions</h2>
+              <p id="recent-caption">Upload a file to see its most recent records.</p>
+            </div>
+          </div>
+          <div class="table-scroll">
+            <table class="transaction-table">
+              <thead>
+                <tr>
+                  <th scope="col">Transaction ID</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Vendor</th>
+                  <th scope="col">Invoice</th>
+                  <th scope="col">Amount (MYR)</th>
+                  <th scope="col">Type</th>
+                </tr>
+              </thead>
+              <tbody id="transaction-rows">
+                <tr><td class="table-empty" colspan="6">No transactions loaded.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="findings" class="dashboard-panel" aria-labelledby="findings-title">
+          <div class="panel-heading">
+            <div>
+              <h2 id="findings-title">Audit findings</h2>
+              <p>Deterministic audit rules and risk classifications will be added in Phase 3B.</p>
+            </div>
+          </div>
+          <div class="phase-notice">
+            <span aria-hidden="true">i</span>
+            <p>
+              Findings are not evaluated in Phase 3A. No risk counts or review statuses
+              are being inferred from uploaded transactions yet.
+            </p>
+          </div>
+        </section>
+      </main>
+      <footer class="dashboard-footer">
+        Uploads are processed locally and held in memory until the server restarts or another valid file is uploaded.
+      </footer>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Ask audit-related questions and get preliminary guidance from a locally hosted AI assistant."
+    />
+    <title>AI Audit Assistant</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <main class="layout">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="AI Audit Assistant home">
+          <span class="brand-mark" aria-hidden="true">A</span>
+          <span>AI Audit Assistant</span>
+        </a>
+        <span class="model-badge"><span aria-hidden="true"></span> Local · Gemma 3</span>
+      </header>
+
+      <section class="workspace" aria-labelledby="page-title">
+        <p class="eyebrow">Audit knowledge assistant</p>
+        <h1 id="page-title">What would you like to review?</h1>
+        <p class="intro">
+          Ask an audit or accounting question. Gemma 3 runs locally through Ollama.
+        </p>
+
+        <form id="question-form">
+          <label for="question">Your question</label>
+          <textarea
+            id="question"
+            name="question"
+            rows="5"
+            maxlength="2000"
+            placeholder="For example: What audit procedures can help identify duplicate supplier payments?"
+            required
+          ></textarea>
+          <div class="form-meta">
+            <span>Do not include confidential or personally identifiable information.</span>
+            <span id="character-count">0 / 2000</span>
+          </div>
+          <button id="submit-button" type="submit">
+            <span id="button-label">Ask Gemma 3</span>
+            <span id="spinner" class="spinner" aria-hidden="true" hidden></span>
+          </button>
+        </form>
+
+        <section class="answer-card" aria-labelledby="answer-heading">
+          <div class="answer-header">
+            <h2 id="answer-heading">Assistant response</h2>
+            <span class="response-tag">AI generated</span>
+          </div>
+          <p id="response" class="response" aria-live="polite">
+            Your response will appear here.
+          </p>
+        </section>
+
+        <aside class="review-warning" role="note">
+          <span class="warning-icon" aria-hidden="true">!</span>
+          <p>
+            <strong>Human review required.</strong>
+            AI-generated responses are preliminary and may be inaccurate.
+            A qualified human auditor must review them before use.
+          </p>
+        </aside>
+      </section>
+      <footer>Private by design · Questions are sent to your local Ollama service</footer>
+    </main>
+
+    <script>
+      const form = document.getElementById("question-form");
+      const questionInput = document.getElementById("question");
+      const characterCount = document.getElementById("character-count");
+      const responseOutput = document.getElementById("response");
+      const submitButton = document.getElementById("submit-button");
+      const buttonLabel = document.getElementById("button-label");
+      const spinner = document.getElementById("spinner");
+
+      questionInput.addEventListener("input", () => {
+        characterCount.textContent = `${questionInput.value.length} / 2000`;
+      });
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const question = questionInput.value.trim();
+
+        if (!question) {
+          responseOutput.textContent = "Enter a question before submitting.";
+          questionInput.focus();
+          return;
+        }
+
+        submitButton.disabled = true;
+        buttonLabel.textContent = "Waiting for Gemma 3…";
+        spinner.hidden = false;
+        responseOutput.classList.remove("response-error");
+        responseOutput.textContent = "Generating a response. This may take a moment…";
+
+        try {
+          const result = await fetch("/ask-ai", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ question }),
+          });
+          const data = await result.json();
+
+          if (!result.ok) {
+            const detail = Array.isArray(data.detail)
+              ? "Please enter a question of 1–2000 characters."
+              : data.detail || "The request could not be completed.";
+            throw new Error(detail);
+          }
+
+          responseOutput.textContent = data.answer;
+        } catch (error) {
+          responseOutput.classList.add("response-error");
+          responseOutput.textContent = `Unable to get a response: ${error.message}`;
+        } finally {
+          submitButton.disabled = false;
+          buttonLabel.textContent = "Ask Gemma 3";
+          spinner.hidden = true;
+        }
+      });
+    </script>
+  </body>
+</html>

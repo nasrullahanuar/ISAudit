@@ -1,0 +1,37 @@
+transaction_id,transaction_date,invoice_number,vendor_name,amount,transaction_type,document_reference
+TX-1001,2025-03-03,INV-3001,Maple Office Supplies,845.50,Invoice,DOC-3001
+TX-1002,2025-03-04,INV-3002,Meridian IT Services,4280.00,Payment,DOC-3002
+TX-1003,2025-03-05,INV-3003,Harbour Printworks,1260.75,Invoice,DOC-3003
+TX-1004,2025-03-06,INV-3004,Cedar Facilities,3195.00,Payment,DOC-3004
+TX-1005,2025-03-07,INV-3005,Northstar Consulting,7850.00,Invoice,DOC-3005
+TX-1006,2025-03-08,INV-3006,Maple Office Supplies,520.00,Payment,DOC-3006
+TX-1007,2025-03-09,INV-3007,Meridian IT Services,940.00,Invoice,DOC-3007
+TX-1008,2025-03-10,INV-3008,Harbour Printworks,2180.00,Payment,DOC-3008
+TX-1009,2025-03-11,INV-3009,Cedar Facilities,760.25,Invoice,DOC-3009
+TX-1010,2025-03-12,INV-3010,Northstar Consulting,11500.00,Payment,DOC-3010
+TX-1011,2025-03-13,INV-3011,Maple Office Supplies,1365.00,Invoice,
+TX-1012,2025-03-14,INV-3012,Meridian IT Services,2740.50,Payment,DOC-3012
+TX-1013,2025-03-15,INV-3013,Harbour Printworks,615.00,Invoice,DOC-3013
+TX-1014,2025-03-16,INV-3014,Cedar Facilities,4920.00,Payment,DOC-3014
+TX-1015,2025-03-17,INV-3015,Northstar Consulting,22000.00,Invoice,DOC-3015
+TX-1016,2025-03-18,INV-3016,Maple Office Supplies,1840.00,Payment,DOC-3016
+TX-1017,2025-03-19,INV-3017,Meridian IT Services,3680.00,Invoice,DOC-3017
+TX-1018,2025-03-20,INV-3018,Harbour Printworks,972.35,Payment,DOC-3018
+TX-1019,2025-03-21,INV-3019,Cedar Facilities,1550.00,Invoice,DOC-3019
+TX-1020,2025-03-22,INV-3020,Northstar Consulting,6800.00,Manual Journal,DOC-3020
+TX-1021,2025-03-23,INV-3021,Maple Office Supplies,2425.00,Invoice,DOC-3021
+TX-1022,2025-03-24,INV-3022,Meridian IT Services,940.00,Payment,DOC-3022
+TX-1023,2025-03-25,INV-3023,Harbour Printworks,1165.00,Invoice,DOC-3023
+TX-1024,2025-03-26,INV-3024,Cedar Facilities,3870.00,Payment,
+TX-1025,2025-03-27,INV-3025,Northstar Consulting,1580.00,Invoice,DOC-3025
+TX-1026,2025-03-28,INV-3026,Maple Office Supplies,1250.00,Invoice,DOC-3026
+TX-1027,2025-03-28,INV-3026,Maple Office Supplies,1250.00,Payment,DOC-3027
+TX-1028,2025-03-29,INV-3028,Meridian IT Services,2600.00,Payment,DOC-3028
+TX-1029,2025-03-29,INV-3028,Meridian IT Services,2600.00,Payment,DOC-3029
+TX-1030,2025-03-30,INV-3030,Harbour Printworks,735.00,Invoice,DOC-3030
+TX-1031,2025-03-31,INV-3031,Cedar Facilities,5280.00,Manual Journal,DOC-3031
+TX-1032,2025-04-01,INV-3032,Northstar Consulting,9850.00,Invoice,DOC-3032
+TX-1033,2025-04-02,INV-3033,Maple Office Supplies,430.00,Payment,DOC-3033
+TX-1034,2025-04-03,INV-3034,Meridian IT Services,1460.00,Invoice,DOC-3034
+TX-1035,2025-04-04,INV-3035,Harbour Printworks,3200.00,Payment,DOC-3035
+TX-1036,2025-04-05,INV-3036,Cedar Facilities,570.00,Invoice,DOC-3036
